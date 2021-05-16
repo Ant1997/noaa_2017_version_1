@@ -15,3 +15,7 @@ Example: http://localhost:8080/station?id=AEM00041194 . This will give you a JSO
 # For Docker:
 https://hub.docker.com/r/antatutd/energybotnoaa2017docker 
 
+In terminal:
+  docker pull antatutd/energybotnoaa2017docker
+  
+This has the large csv file.
