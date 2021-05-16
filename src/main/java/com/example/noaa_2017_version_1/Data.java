@@ -1,5 +1,6 @@
 package com.example.noaa_2017_version_1;
 
+//Data class represents each data rows in the csv file.
 public class Data {
     //AEM00041194,20170101,PRCP,0,,,S,
     private final String id;

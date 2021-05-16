@@ -11,10 +11,9 @@ import java.util.ArrayList;
 
 @RestController
 public class DataController {
-
     // /station?id=AEM00041194 => Lists all lines with that ID
     @GetMapping("/station")
-    public ArrayList<Data> findAllId(@RequestParam(value = "id", defaultValue = "AEM00041194") String idInput){
+    public ArrayList<Data> findAllId(@RequestParam(value = "id") String idInput){
         String file = System.getProperty("user.dir")  +
                 "\\src\\main\\java\\com\\example\\noaa_2017_version_1\\" +
                 "2017.csv";
@@ -22,34 +21,35 @@ public class DataController {
         String line = "";
         ArrayList <Data> arrayList = new ArrayList<Data>();
 
-        try{
-            reader = new BufferedReader(new FileReader(file));
-            while((line = reader.readLine()) != null){
+        if (idInput == ""){
+            return arrayList;
+        }
+        else {
+            try {
+                reader = new BufferedReader(new FileReader(file));
+                while ((line = reader.readLine()) != null) {
 
-                String[] row = line.split(",");
-                if (row[0].equals(idInput)){
-                    Data newData;
-                    if (row.length > 7){
-                        newData = new Data(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]);
+                    String[] row = line.split(",");
+                    if (row[0].equals(idInput)) {
+                        Data newData;
+                        if (row.length > 7) {
+                            newData = new Data(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]);
+                        } else {
+                            newData = new Data(row[0], row[1], row[2], row[3], row[4], row[5], row[6], "");
+                        }
+                        arrayList.add(newData);
                     }
-                    else{
-                        newData = new Data(row[0], row[1], row[2], row[3], row[4], row[5], row[6], "");
-                    }
-                    arrayList.add(newData);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        finally{
-            try{
-                reader.close();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-
         return arrayList;
     }
 }
