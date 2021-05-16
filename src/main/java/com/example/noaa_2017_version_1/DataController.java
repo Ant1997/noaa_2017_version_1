@@ -20,34 +20,28 @@ public class DataController {
         BufferedReader reader = null;
         String line = "";
         ArrayList <Data> arrayList = new ArrayList<Data>();
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            while ((line = reader.readLine()) != null) {
 
-        if (idInput == ""){
-            return arrayList;
-        }
-        else {
-            try {
-                reader = new BufferedReader(new FileReader(file));
-                while ((line = reader.readLine()) != null) {
-
-                    String[] row = line.split(",");
-                    if (row[0].equals(idInput)) {
-                        Data newData;
-                        if (row.length > 7) {
-                            newData = new Data(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]);
-                        } else {
-                            newData = new Data(row[0], row[1], row[2], row[3], row[4], row[5], row[6], "");
-                        }
-                        arrayList.add(newData);
+                String[] row = line.split(",");
+                if (row[0].equals(idInput)) {
+                    Data newData;
+                    if (row.length > 7) {
+                        newData = new Data(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]);
+                    } else {
+                        newData = new Data(row[0], row[1], row[2], row[3], row[4], row[5], row[6], "");
                     }
+                    arrayList.add(newData);
                 }
-            } catch (Exception e) {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
         return arrayList;

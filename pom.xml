@@ -47,6 +47,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>energybotnoaa2017docker</finalName>
 	</build>
 
 </project>
