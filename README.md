@@ -9,3 +9,9 @@ ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2017.csv.gz
 2) Go on browser and go to http://localhost:8080/station?id=ID_HERE
 3) ID_HERE from step 2 is the ID you would want to look up the data from.
 Example: http://localhost:8080/station?id=AEM00041194 . This will give you a JSON like this: [{"id":"AEM00041194","yearMonthDay":"20170101","element":"PRCP","value":"0","mFlag":"","qFlag":"","sFlag":"S","xFlag":""},{"id":"AEM00041194","yearMonthDay":"20170101","element":"TAVG","value":"223","mFlag":"H","qFlag":"","sFlag":"S","xFlag":""}]
+
+
+
+# For Docker:
+https://hub.docker.com/r/antatutd/energybotnoaa2017docker 
+
